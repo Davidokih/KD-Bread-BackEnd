@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const uploadModel = require('../model/uploadModel');
-<<<<<<< HEAD
 const formModel = require('../model/formModel');
 const cloudinary = require("../utils/cloudinary");
 const fs = require('fs');
@@ -17,12 +16,11 @@ router.post("/upload", upload, async (req, res) => {
             price: req.body.price,
             avatar: myImage.secure_url,
             avatarID: myImage.public_id
-=======
-const userModel = require('../model/userModel');
-const cloudinary = require("../utils/cloudinary");
-const { image, upload } = require('../multer');
-const verify = require('../utils/verification');
-const mongoose = require('mongoose');
+        const userModel = require('../model/userModel');
+        const cloudinary = require("../utils/cloudinary");
+        const { image, upload } = require('../multer');
+        const verify = require('../utils/verification');
+        const mongoose = require('mongoose');
 
 router.post("/:id/upload", upload, async (req, res) => {
     try {
@@ -36,7 +34,6 @@ router.post("/:id/upload", upload, async (req, res) => {
             avatarID: myImage.public_id
             // image: myImage.secure_url,
             // imageID: myImage.public_id
->>>>>>> ac33d0fc06eaefdc8c8333ca0bb89955f553ee4b
         });
 
         imageUpload.user = getUser;
@@ -53,7 +50,6 @@ router.post("/:id/upload", upload, async (req, res) => {
             status: "Fail",
             message: error
         });
-<<<<<<< HEAD
         // console.log(error)
     }
 });
@@ -71,12 +67,10 @@ router.post("/:id/upload", upload, async (req, res) => {
 //     }
 // });
 router.get("/", async (req, res) => {
-=======
         console.log(error);
     }
 });
 router.get("/getAll", async (req, res) => {
->>>>>>> ac33d0fc06eaefdc8c8333ca0bb89955f553ee4b
     try {
         const myImage = await uploadModel.find();
         res.status(200).json({
@@ -92,12 +86,7 @@ router.get("/getAll", async (req, res) => {
 });
 router.get("/getAll/:imageid", async (req, res) => {
     try {
-<<<<<<< HEAD
         const myImage = await uploadModel.findById(req.params.imageid);
-=======
-        const myImage = await uploadModel.findById(req.params.imageid).populate('user');
->>>>>>> ac33d0fc06eaefdc8c8333ca0bb89955f553ee4b
-        res.status(200).json({
             status: "Success",
             data: myImage
         });
@@ -108,7 +97,6 @@ router.get("/getAll/:imageid", async (req, res) => {
         });
     }
 });
-<<<<<<< HEAD
 router.patch("/getAll/:imageid", async (req, res) => {
     try {
         const { title, description } = req.body;
@@ -124,8 +112,6 @@ router.patch("/getAll/:imageid", async (req, res) => {
             status: "Success",
             data: result
         });
-=======
-router.patch("/getAll/:imageid", verify, upload, async (req, res) => {
     try {
         if (req.user.admin === true) {
             const check = await uploadModel.findById(req.params.imageid);
@@ -153,7 +139,6 @@ router.patch("/getAll/:imageid", verify, upload, async (req, res) => {
                 message: 'Image not found'
             });
         }
->>>>>>> ac33d0fc06eaefdc8c8333ca0bb89955f553ee4b
     } catch (error) {
         res.status(404).json({
             status: "Fail",
